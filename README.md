@@ -1,0 +1,5 @@
+# AffordableHousingSearchToolFinal
+The AffordableHousingSearchToolFinal is a mobile responsive web application created as part of a Code for America Community Fellowship in Austin TX. It can be used on a desktop browser but is primarily meant for mobile users. It allows users to search for Affordable Housing inventory by connecting to Austin's AffordableHousingDataHub. An instance of this application was deployed for Austin TX so that residents could have one place to access the entirety of Austin's affordable housing inventory, and also filter by critiera that fit their specific needs.
+
+### Technologies
+The AffordableHousingSearchToolFinal uses node on the backend and javascript / JQuery / css on the frontend. It uses Leaflet's javascript library for interactive maps, with a dependency on Mapbox's API. A Mapbox service account will be needed to utilize this Mapbox mapping layer that is built into the application. Any API can be used to retrieving housing data, but the one configured by default by this project is Austin's AffordableHousingDataHub.
