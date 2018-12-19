@@ -10,7 +10,7 @@ var os = require("os");
 
 if (DEV) {
     var PORT = 8000;
-    var htmlFile2 = "/Users/rmathur101/Desktop/WORKING_ON/PROJECTS/AFFORDABLE_HOUSING/affordable_housing_search_tool/index_2.html";
+    var htmlFile2 = "/Users/rmathur101/Desktop/WORKING_ON/PROJECTS/AFFORDABLE_HOUSING/affordable_housing_search_tool_final/index_2.html";
 } else {
     var PORT = 80;
     var htmlFile2 = "/home/ubuntu/AffordableHousingSearchTool/index_2.html"
