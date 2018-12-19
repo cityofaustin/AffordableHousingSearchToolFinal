@@ -1,3 +1,4 @@
 .DS_STORE
 /node_modules
 /public/mapbox_public_key.js
+/public/data_hub_api_endpoint.js

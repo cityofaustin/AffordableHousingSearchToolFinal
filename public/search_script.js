@@ -1,5 +1,3 @@
-var DATA_HUB_API_ENDPOINT = 'http://ec2-54-203-72-236.us-west-2.compute.amazonaws.com/get_all_properties';
-
 var userOptions = {
     filters: []
 }
@@ -229,7 +227,7 @@ function addMatchScore(property) {
 
 function getAllProperties() {
     $.get(
-        DATA_HUB_API_ENDPOINT,
+        data_hub_api_endpoint,
         function(response) {
             console.log(response);
             var propertiesTemp = response.data;
