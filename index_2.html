@@ -143,18 +143,32 @@
                 <br/>
 
                 <div class='justify-center'>
-                   <div id='welcome-header'>CRITERIA</div>
+                   <div id='welcome-header'>WELCOME</div>
                 </div>
 
+                <br/>
+
                 <div class='justify-center' style='margin-top: 10px;'>
-                        <div>
-                            <div class='justify-center'>
-                                <span class='options-wizard-question-text justify-center'>What is your household's yearly income?</span>
-                            </div>
-                            <div class='justify-center' style='margin-top: 10px;'>
-                                <span id='money-symbol'>$ </span><input id='yearly-income-input' class='form-control' style='font-size: 18px; height: 30; width: 200px;'>
-                            </div>
+                    <div>
+                        <div class='justify-center'>
+                            <span class='options-wizard-question-text justify-center'>What is your household's yearly income?</span>
                         </div>
+                        <div class='justify-center' style='margin-top: 10px;'>
+                            <span id='money-symbol'>$ </span><input type='number' id='yearly-income-input' class='form-control' style='font-size: 18px; height: 30; width: 200px;'>
+                        </div>
+                    </div>
+                </div>
+
+                <br/>
+                <div class='justify-center' style='margin-top: 10px;'>
+                    <div>
+                        <div class='justify-center'>
+                            <span class='options-wizard-question-text justify-center'>How many people are in your household?</span>
+                        </div>
+                        <div class='justify-center' style='margin-top: 10px;'>
+                            <span id='money-symbol' style='color: #337ab7; opacity: 0.9'>x </span><input type='number' id='household-size' class='form-control' style='font-size: 18px; height: 30; width: 200px;'>
+                        </div>
+                    </div>
                 </div>
 
                 <div class='justify-center' style='margin-top: 30px;'>
@@ -364,8 +378,8 @@
             <div class='justify-center wizard-btns-container'>
                 <div class='justify-center'>
                     <button class='back-btn' style='display: none;'>BACK</button>
-                    <button class='next-btn'>NEXT</button>
-                    <button class='done-btn' style='display: none;'>DONE</button>
+                    <!-- <button class='next-btn'>NEXT</button> -->
+                    <button class='done-btn'>DONE</button>
                 </div>
             </div>
         </div>
