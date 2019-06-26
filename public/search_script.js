@@ -401,7 +401,8 @@ function renderMarkers2(map) {
     var numSection8Units = 0;
 
 
-    let mfi = getMFILevel(userOptions['income'], userOptions['household-size']);
+    // TODO: need to set validation to make sure they enter this, need to add logic below to somehow filter or indicate matching indicators
+    // let mfi = getMFILevel(userOptions['income'], userOptions['household-size']);
 
     // first 10 'highest' matches are marked as recommended
     // var first10 = 0;
