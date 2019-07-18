@@ -113,6 +113,10 @@ var incomeLimits = {
 }
 
 function getMFILevel(yearlyIncome, householdSize) {
+    if (!yearlyIncome || !householdSize) {
+        return null;
+    }
+
     let size = householdSize;
     if (householdSize > 8) {
         size = 8;
@@ -386,44 +390,44 @@ function renderMarkers2(map) {
 
     let size = userOptions['household-size'];
     let mfiLevel = getMFILevel(userOptions.income, size);
-
+    let mfiPropertyMatches = [];
     let allMfiLevels = [20, 30, 40, 50, 60, 65, 70, 80, 100, 120, 140];
 
+    if (mfiLevel) {
 
-    let tempMFILevel = mfiLevel;
-    let mfiPropertyMatches = [];
-    let doneMatching = false;
+        let tempMFILevel = mfiLevel;
+        let doneMatching = false;
 
-    while(mfiPropertyMatches.length < 5 && !doneMatching) {
-        console.log('in while loop');
-        for (var pr in properties) {
-            var property = properties[pr];
-            var x = 'data__num_units_mfi_' + tempMFILevel;
-            if (parseInt(property[x]) > 0) {
-                mfiPropertyMatches.push(property.data__id);
+        while(mfiPropertyMatches.length < 5 && !doneMatching) {
+            console.log('in while loop');
+            for (var pr in properties) {
+                var property = properties[pr];
+                var x = 'data__num_units_mfi_' + tempMFILevel;
+                if (parseInt(property[x]) > 0) {
+                    mfiPropertyMatches.push(property.data__id);
+                }
+                if (mfiPropertyMatches.length >= 5) {
+                    doneMatching = true;
+                    break;
+                }
             }
-            if (mfiPropertyMatches.length >= 5) {
+
+            let mfiLevelIndex = allMfiLevels.findIndex(function(mfi) {
+                return mfi == tempMFILevel;
+            });
+
+            var tempMFILevelIndex = mfiLevelIndex + 1;
+
+            if (tempMFILevelIndex > (allMfiLevels.length - 1)) {
                 doneMatching = true;
-                break;
+            } else {
+                tempMFILevel = allMfiLevels[tempMFILevelIndex];
             }
         }
 
-        let mfiLevelIndex = allMfiLevels.findIndex(function(mfi) {
-            return mfi == tempMFILevel;
-        });
-
-        var tempMFILevelIndex = mfiLevelIndex + 1;
-
-        if (tempMFILevelIndex > (allMfiLevels.length - 1)) {
-            doneMatching = true;
-        } else {
-            tempMFILevel = allMfiLevels[tempMFILevelIndex];
-        }
+        console.log('anything?');
+        console.log(mfiPropertyMatches);
     }
-
-    console.log('anything?');
-    console.log(mfiPropertyMatches);
-
 
 
 
