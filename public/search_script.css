@@ -288,12 +288,16 @@
     margin-right: 30px;
 }
 
+#options-wizard-1 {
+    display: none;
+}
+
 #options-wizard-2 {
     display: none;
 }
 
 #options-wizard-3 {
-    display: none;
+    /*display: none;*/
 }
 
 #options-wizard-4 {
