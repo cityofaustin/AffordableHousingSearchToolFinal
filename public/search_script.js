@@ -135,6 +135,7 @@ function getMFILevel(yearlyIncome, householdSize) {
 
    let mfi = incomeLimits[size][thisIncome];
    console.log(mfi);
+   return mfi;
 }
 
 $(document).ready(function() {
@@ -383,6 +384,48 @@ function getAllProperties() {
 
 function renderMarkers2(map) {
 
+    let size = userOptions['household-size'];
+    let mfiLevel = getMFILevel(userOptions.income, size);
+
+    let allMfiLevels = [20, 30, 40, 50, 60, 65, 70, 80, 100, 120, 140];
+
+
+    let tempMFILevel = mfiLevel;
+    let mfiPropertyMatches = [];
+    let doneMatching = false;
+
+    while(mfiPropertyMatches.length < 5 && !doneMatching) {
+        console.log('in while loop');
+        for (var pr in properties) {
+            var property = properties[pr];
+            var x = 'data__num_units_mfi_' + tempMFILevel;
+            if (parseInt(property[x]) > 0) {
+                mfiPropertyMatches.push(property.data__id);
+            }
+            if (mfiPropertyMatches.length >= 5) {
+                doneMatching = true;
+                break;
+            }
+        }
+
+        let mfiLevelIndex = allMfiLevels.findIndex(function(mfi) {
+            return mfi == tempMFILevel;
+        });
+
+        var tempMFILevelIndex = mfiLevelIndex + 1;
+
+        if (tempMFILevelIndex > (allMfiLevels.length - 1)) {
+            doneMatching = true;
+        } else {
+            tempMFILevel = allMfiLevels[tempMFILevelIndex];
+        }
+    }
+
+    console.log('anything?');
+    console.log(mfiPropertyMatches);
+
+
+
 
     var markers = new L.FeatureGroup();
 
@@ -416,8 +459,14 @@ function renderMarkers2(map) {
         //     properties[property.data__id].color = 'green';
         // } else {
 
-            var marker = L.marker([parseFloat(property.data__lat), parseFloat(property.data__longitude)], {icon: assignMarker("blue")});
-            properties[property.data__id].color = 'blue';
+            if (_.contains(mfiPropertyMatches, property.data__id)) {
+                var marker = L.marker([parseFloat(property.data__lat), parseFloat(property.data__longitude)], {icon: assignMarker("green")});
+                properties[property.data__id].color = 'green';
+            } else {
+                var marker = L.marker([parseFloat(property.data__lat), parseFloat(property.data__longitude)], {icon: assignMarker("blue")});
+                properties[property.data__id].color = 'blue';
+            }
+
         // }
 
         marker.markerID = property.data__id;
@@ -472,7 +521,8 @@ function removeSelectedMarker() {
     map.removeLayer(tempMarker);
 
     // var marker = L.marker([parseFloat(property.data__lat), parseFloat(property.data__longitude)], {icon: assignMarker(property.data__color, (property.data__color == 'orange' ? 'star' : 'home'))});
-    var marker = L.marker([parseFloat(property.data__lat), parseFloat(property.data__longitude)], {icon: assignMarker("blue")});
+    // var marker = L.marker([parseFloat(property.data__lat), parseFloat(property.data__longitude)], {icon: assignMarker("blue")});
+    var marker = L.marker([parseFloat(property.data__lat), parseFloat(property.data__longitude)], {icon: assignMarker(property.color)});
     marker.on("click", markerOnClick);
     marker.markerID = property.data__id;
     map.addLayer(marker);
@@ -493,6 +543,8 @@ function markerOnClick() {
 
     var id = this.markerID;
     var property = properties[id];
+
+    // console.log(property);
 
     tempMarkerId = id;
     tempLat = property.data__lat;
